@@ -1,10 +1,61 @@
 from django.db import models
 
-from wagtail.models import Page
+from wagtail.models import (
+    DraftStateMixin,
+    Page,
+    PreviewableMixin,
+    RevisionMixin,
+    TranslatableMixin,
+)
+from modelcluster.models import ClusterableModel
 from wagtail.admin.panels import (
     FieldPanel,
     MultiFieldPanel,
+    PublishingPanel,
 )
+from wagtail.fields import RichTextField, StreamField
+from wagtail.contrib.settings.models import (
+    BaseGenericSetting,
+    BaseSiteSetting,
+    register_setting,
+)
+
+
+
+
+class FooterText(
+    DraftStateMixin,
+    RevisionMixin,
+    PreviewableMixin,
+    TranslatableMixin,
+    models.Model,
+):
+    """
+    This provides editable text for the site footer. Again it is registered
+    using `register_snippet` as a function in wagtail_hooks.py to be grouped
+    together with the Person model inside the same main menu item. It is made
+    accessible on the template via a template tag defined in base/templatetags/
+    navigation_tags.py
+    """
+
+    body = RichTextField()
+
+    panels = [
+        FieldPanel("body"),
+        PublishingPanel(),
+    ]
+
+    def __str__(self):
+        return "Footer text"
+
+    def get_preview_template(self, request, mode_name):
+        return "base.html"
+
+    def get_preview_context(self, request, mode_name):
+        return {"footer_text": self.body}
+
+    class Meta(TranslatableMixin.Meta):
+        verbose_name_plural = "Footer Text"
 
 
 class HomePage(Page):
@@ -63,3 +114,35 @@ class HomePage(Page):
 
     def __str__(self):
         return self.title
+
+
+@register_setting
+class GenericSettings(ClusterableModel, BaseGenericSetting):
+    twitter_url = models.URLField(verbose_name="Twitter URL", blank=True)
+    github_url = models.URLField(verbose_name="GitHub URL", blank=True)
+    organisation_url = models.URLField(verbose_name="Organisation URL", blank=True)
+
+    panels = [
+        MultiFieldPanel(
+            [
+                FieldPanel("github_url"),
+                FieldPanel("twitter_url"),
+                FieldPanel("organisation_url"),
+            ],
+            "Social settings",
+        )
+    ]
+
+
+@register_setting
+class SiteSettings(BaseSiteSetting):
+    title_suffix = models.CharField(
+        verbose_name="Title suffix",
+        max_length=255,
+        help_text="The suffix for the title meta tag e.g. ' | The Wagtail Bakery'",
+        default="The Wagtail Bakery",
+    )
+
+    panels = [
+        FieldPanel("title_suffix"),
+    ]
