@@ -15,21 +15,21 @@ def get_site_root(context):
     return Site.find_for_request(context["request"]).root_page
 
 
-# def has_menu_children(page):
-#     # This is used by the top_menu property
-#     # get_children is a Treebeard API thing
-#     # https://tabo.pe/projects/django-treebeard/docs/4.0.1/api.html
-#     return page.get_children().live().in_menu().exists()
+def has_menu_children(page):
+    # This is used by the top_menu property
+    # get_children is a Treebeard API thing
+    # https://tabo.pe/projects/django-treebeard/docs/4.0.1/api.html
+    return page.get_children().live().in_menu().exists()
 
 
-# def has_children(page):
-#     # Generically allow index pages to list their children
-#     return page.get_children().live().exists()
+def has_children(page):
+    # Generically allow index pages to list their children
+    return page.get_children().live().exists()
 
 
-# def is_active(page, current_page):
-#     # To give us active state on main navigation
-#     return current_page.url_path.startswith(page.url_path) if current_page else False
+def is_active(page, current_page):
+    # To give us active state on main navigation
+    return current_page.url_path.startswith(page.url_path) if current_page else False
 
 
 # Retrieves the top menu items - the immediate children of the parent page
