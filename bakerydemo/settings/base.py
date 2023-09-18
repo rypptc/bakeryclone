@@ -26,6 +26,8 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 INSTALLED_APPS = [
     "home",
     "search",
+    "breads",
+    "django_extensions",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.settings",
@@ -66,6 +68,7 @@ TEMPLATES = [
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
             os.path.join(PROJECT_DIR, "templates"),
+            os.path.join(BASE_DIR, "breads/templates/breads"),
         ],
         "APP_DIRS": True,
         "OPTIONS": {
