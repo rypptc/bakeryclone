@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "home",
     "search",
     "breads",
+    "blog",
     "django_extensions",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
