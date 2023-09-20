@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "home",
     "search",
     "breads",
+    "locations",
     "blog",
     "django_extensions",
     "wagtail.contrib.forms",
@@ -70,6 +71,8 @@ TEMPLATES = [
         "DIRS": [
             os.path.join(PROJECT_DIR, "templates"),
             os.path.join(BASE_DIR, "breads/templates/breads"),
+            os.path.join(BASE_DIR, "locations/templates/locations"),
+
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -172,3 +175,6 @@ WAGTAILSEARCH_BACKENDS = {
 WAGTAILADMIN_BASE_URL = "http://example.com"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Override in local settings or replace with your own key. Please don't use our demo key in production!
+GOOGLE_MAP_API_KEY = "AIzaSyD31CT9P9KxvNUJOwDq2kcFEIG8ADgaFgw"
