@@ -76,6 +76,7 @@ TEMPLATES = [
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
             os.path.join(PROJECT_DIR, "templates"),
+            os.path.join(BASE_DIR, "home/templates/home"),
             os.path.join(BASE_DIR, "breads/templates/breads"),
             os.path.join(BASE_DIR, "locations/templates/locations"),
             os.path.join(BASE_DIR, "recipes/templates/recipes"),
