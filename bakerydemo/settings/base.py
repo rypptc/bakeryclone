@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "breads",
     "locations",
     "blog",
+    "recipes",
     "django_extensions",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
@@ -41,6 +42,11 @@ INSTALLED_APPS = [
     "wagtail.images",
     "wagtail.search",
     "wagtail.admin",
+
+    # for admin tables
+    "wagtail.contrib.table_block",
+    "wagtail.contrib.typed_table_block",
+
     "wagtail",
     "modelcluster",
     "taggit",
@@ -72,7 +78,7 @@ TEMPLATES = [
             os.path.join(PROJECT_DIR, "templates"),
             os.path.join(BASE_DIR, "breads/templates/breads"),
             os.path.join(BASE_DIR, "locations/templates/locations"),
-
+            os.path.join(BASE_DIR, "recipes/templates/recipes"),
         ],
         "APP_DIRS": True,
         "OPTIONS": {
